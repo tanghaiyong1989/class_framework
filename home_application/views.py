@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from common.mymako import render_mako_context
+from common.mymako import render_mako_context, render_json
 
 
 def home(request):
@@ -27,4 +27,23 @@ def helloworld(request):
     """
     helloworld
     """
-    return render_mako_context(request, '/home_application/helloworld.html')
+    data = [
+        {
+            "use": "20%",
+            "ip": "10.0.1.14",
+            "filesystem": "/dev/vda1",
+            "mounted": "/",
+            "createtime": "2018-07-11 22:31:01",
+            "size": "50G"
+        },
+        {
+            "use": "0%",
+            "ip": "10.0.1.14",
+            "filesystem": "devtmpfs",
+            "mounted": "/dev",
+            "createtime": "2018-07-11 22:31:01",
+            "size": "7.8G"
+        }
+    ]
+    return render_json({'result':False, 'data':data, 'message':u'token不合法'})
+    # return render_mako_context(request, '/home_application/helloworld.html')

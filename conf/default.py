@@ -22,8 +22,8 @@ from django.conf.global_settings import *  # noqa
 # 应用基本信息配置 (请按照说明修改)
 # ==============================================================================
 # 在蓝鲸智云开发者中心 -> 点击应用ID -> 基本信息 中获取 APP_ID 和 APP_TOKEN 的值
-APP_ID = 'class-1'
-APP_TOKEN = '37ecdba3-9e18-47e3-8b9f-ceadad439792'
+APP_ID = 'custom-atoms'
+APP_TOKEN = 'c725f076-440f-452f-b10a-d56db43c2d9f'
 # 蓝鲸智云开发者中心的域名，形如：http://paas.bking.com
 BK_PAAS_HOST = 'http://paas.bk.cloud.tencent.com/'
 
@@ -112,6 +112,7 @@ INSTALLED_APPS = (
     'app_control',
     'account',
     'home_application',
+    'custom_atoms',
 )
 
 # ==============================================================================
@@ -135,14 +136,32 @@ PYTHON_BIN = os.path.dirname(sys.executable)
 # 静态资源文件(js,css等）在应用上线更新后, 由于浏览器有缓存, 可能会造成没更新的情况.
 # 所以在引用静态资源的地方，都需要加上这个版本号，如：<script src="/a.js?v=${STATIC_VERSION}"></script>；
 # 如果静态资源修改了以后，上线前修改这个版本号即可
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(PROJECT_ROOT, 'static'),
+# )
 STATIC_VERSION = 0.1
 # 应用本地静态资源目录
 STATIC_URL = '%sstatic/' % SITE_URL
 
 ROOT_URLCONF = 'urls'
+
+# # 判断是否为本地开发环境
+# IS_LOCAL = not os.getenv('BKPAAS_ENVIRONMENT', False)
+
+# # static root and dirs to find blueapps static
+# if not IS_LOCAL:
+#     STATIC_ROOT = 'staticfiles'
+#     FORCE_SCRIPT_NAME = SITE_URL
+#     STATIC_URL = '%sstatic/' % FORCE_SCRIPT_NAME
+# else:
+#     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#     STATIC_URL = '/static/'
+#     
+# STATIC_ROOT,静态文件收集文件夹,由于企业版需要用户手动收集,此处设为空,
+# 同时需要设置STATICFILES_DIRS不改变
+STATICFILES_DIRS = []
+STATIC_ROOT = "static"
+
 # ==============================================================================
 # Templates
 # ==============================================================================
